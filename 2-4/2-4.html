@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<script type="text/javascript" src="https://jp.vuejs.org/js/vue.js"></script>
+<script type="text/javascript" src="2-4.js" defer></script>
+<link rel="stylesheet" type="text/css" href="2-4.css">
+<!--テキストの入力-->
+<div id="app">
+	{{message}}
+</div>
+
+<!--式を使った出力-->
+<div id="app2">
+	{{lang == 'ja' ? message_ja : message_en}}
+</div>
+
+<!--属性にバインドする-->
+<div id="app3">
+	<input type="text" v-bind:value="message">
+</div>
+
+<!--スタイル属性にバインドする-->
+<div id="app4">
+	<p v-bind:style="{fontSize: pSize, color: pColor}">文字サイズは{{pSize}}です。</p>
+</div>
+
+<!--クラス属性にバインドする-->
+<div id="app5">
+	<p v-bind:class="{capitalize: isCapital}">hello vue!</p>
+</div>
