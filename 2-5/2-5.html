@@ -1,0 +1,12 @@
+<meta charset="utf-8">
+<script type="text/javascript" src="https://jp.vuejs.org/js/vue.js"></script>
+<script type="text/javascript" src="2-5.js" defer></script>
+<!--グローバルスコープにフィルターを登録する-->
+<div id="app">
+	{{price | number_format}}
+</div>
+
+<!--複数のフィルターをつなげる-->
+<div id="app">
+	{{price | unit)}} {{price | number_format | unit}}
+</div>

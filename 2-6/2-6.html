@@ -1,0 +1,16 @@
+<meta charset="utf-8">
+<script type="text/javascript" src="https://jp.vuejs.org/js/vue.js"></script>
+<script type="text/javascript" src="2-6.js" defer></script>
+<!--算出プロパティとは-->
+<div id="app">
+	調べたい年:<input type="text" v-model="year"><br>
+	{{year}}年は{{isUrudoshi ? 'うるう年です' : 'うるう年ではありません'}}
+</div>
+
+<!--算出プロパティはキャッシュされる-->
+<div id="app2">
+	<div v-show="show">
+		<p>now1: "{{ now1() }}"</p>
+		<p>now2: "{{ now2 }}"</p>
+	</div>
+</div>
