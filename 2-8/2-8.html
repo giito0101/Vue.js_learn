@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<script type="text/javascript" src="https://jp.vuejs.org/js/vue.js"></script>
+<script type="text/javascript" src="2-8.js" defer></script>
+<!--ウォッチャの登録-->
+<div id="app">
+	<template v-if="stock >= 1">
+		<span class="num">残り{{stock}}個</span>
+		<button class="btn" v-on:click="onDeleteItem">削除</button>
+	</template>
+	{{message}}
+</div>
+
+<!--算出プロパティとウォッチャの使い分け-->
+<div id="app2">
+	<template v-if="stock >= 1">
+		<span class="num">残り{{stock}}個</span>
+		<button class="btn" v-on:click="onDeleteItem">削除</button>
+	</template>
+	{{statusMessage}}
+</div>
+
+<!--ウォッチャで算出プロパティを監視する-->
+<div id="app3">
+	<template v-if="stock >= 1">
+		<span class="num">残り{{stock}}個</span>
+		<button class="btn" v-on:click="onDeleteItem">削除</button>
+	</template>
+	{{statusMessage}}
+</div>

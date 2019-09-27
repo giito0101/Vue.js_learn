@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<script type="text/javascript" src="https://jp.vuejs.org/js/vue.js"></script>
+<script type="text/javascript" src="2-7.js" defer></script>
+<!--イベントハンドラの登録-->
+<div id="app">
+	<template v-if="stock>=1">
+		<span class="num">残り{{stock}}個</span>
+		<button class="btn" v-on:click="onDeleteItem">削除</button>
+	</template>
+	<template v-else>在庫切れ</template>
+</div>
+
+<!--クリックイベントの使用例-->
+<div id="app2">
+	<span class="num"></span>
+	<button class="btn">削除</button>
+</div>
+
+<!--resiezeイベントのハンドリング-->
+<div id="app3">
+	ウィンドウの横幅:{{width}}<br>
+	ウィンドウの高さ:{{height}}
+</div>
+
+<!--イベントハンドラが受け取る引数-->
+<div id="app4">
+	<p>マウスカーソルの位置:{{point.x}}, {{point.y}}</p>
+</div>
