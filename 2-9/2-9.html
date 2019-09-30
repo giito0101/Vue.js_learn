@@ -1,0 +1,20 @@
+<meta charset="utf-8">
+<script type="text/javascript" src="https://jp.vuejs.org/js/vue.js"></script>
+<script type="text/javascript" src="2-9.js" defer></script>
+<!--単純なフォーム入力バインディング-->
+<div id="app">
+	<input type="text" v-model="year">
+	<p>{{year}}</p>
+</div>
+
+<!--入力文字をDOMへリアルタイムに反映する-->
+<div id="app2">
+	<input type="text" v-on:input="yearInputHandler" v-bind:value="year">
+	<p>{{year}}</p>
+</div>
+
+<!--一方通行のバインディング-->
+<div id="app3">
+	<textarea>{{message}}</textarea>
+	<pre>入力内容：{{message}}</pre>
+</div>
