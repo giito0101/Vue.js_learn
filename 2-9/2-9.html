@@ -18,3 +18,27 @@
 	<textarea>{{message}}</textarea>
 	<pre>入力内容：{{message}}</pre>
 </div>
+
+<!--チェックボックスに文字列をバインドする-->
+<div id="app4">
+	<label>ケーキはお好きですか？：{{answer}}</label>
+	<input id="cake" type="checkbox" v-model="answer" true-value="はい" false-value="いいえ">
+	<label for="cake">チェックしてください</label>
+</div>
+
+<!--グループ化したチェックボックスにバインドする-->
+<div id="app5">
+	<p>ご注文をお選びください：{{selection}}</p>
+	<label>
+		<input type="checkbox" v-model="answer" value="ケーキ">ケーキ
+	</label>
+	<label>
+		<input type="checkbox" v-model="answer" value="紅茶">紅茶
+	</label>
+	<label>
+		<input type="checkbox" v-model="answer" value="コーヒー">コーヒー
+	</label>
+</div>
+
+<!--ラジオボタンにバインドする-->
+<!--<div id="app6"></div>-->
