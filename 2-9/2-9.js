@@ -99,7 +99,7 @@ var app = new Vue({
 			{code: 'ans4', label: '半年に1回'}
 		]
 	}
-})
+});
 
 //カレンダーにバインドする
 var app = new Vue({
@@ -121,4 +121,69 @@ var app = new Vue({
 			return result;
 		}
 	}
-})
+});
+
+//カレンダーの選択範囲を制限する
+var app = new Vue({
+	el: '#app11',
+	data: {
+		arrival_date: null,
+		min_date: null
+	},
+	created: function(){
+		//翌日の日付を初期値とする
+		var dt = new Date();
+		dt.setDate(dt.getDate() + 1);
+		this.arrival_date = this.formatDate(dt);
+		//翌日の日付を最小値とする
+		this.min_date = this.arrival_date;
+	},
+	methods: {
+		//日付をYYYY-MM-DDに整形するメソッド
+		formatDate: function(dt) {
+			var y = dt.getFullYear();
+			var m = ('00' + (dt.getMonth() + 1)).slice(-2);
+			var d = ('00' + dt.getDate()).slice(-2);
+			var result = y + '-' + m + '-' + d;
+			return result;
+		}
+	}
+});
+
+//フォームコントロールの同期
+var app = new Vue({
+	el: '#app12',
+	data:{
+		//1
+		color: '#000000',
+		red: 0,
+		blue: 0,
+		green: 0
+	},
+	computed: {
+		//2
+		//赤・緑・青を配列で返す算出プロパティ
+		colorElement: function(){
+			return [this.red, this.green, this.blue];
+		}
+	},
+	watch: {
+		//赤・緑・青のいずれかの変更を監視する
+		colorElement: function(newRGB, oldRGB) {
+			//3
+			//赤・緑・青を２桁の１６進数表記に変換する
+			var r = ('00' + newRGB[0].toString(16).toUpperCase()).slice(-2);
+			var g = ('00' + newRGB[1].toString(16).toUpperCase()).slice(-2);
+			var b = ('00' + newRGB[2].toString(16).toUpperCase()).slice(-2);
+			//#RRGGBB形式の文字列で更新する
+			this.color = '#' + r + g + b;
+		},
+		//カラーパレットの選択変更を監視する
+		color: function(newColor, oldColor) {
+			//4
+			this.red = parseInt(newColor.substr(1,2), 16);
+			this.green = parseInt(newColor.substr(3,2), 16);
+			this.blue = parseInt(newColor.substr(5,2), 16);
+		}
+	}
+});
