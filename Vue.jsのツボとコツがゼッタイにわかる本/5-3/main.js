@@ -1,4 +1,9 @@
-var app =new VTTCue({
+//数値を通過書式「#,###,###」に変換するフィルター
+Vue.filter('number_format', function(val) {
+    return val.toLocaleString();
+});
+
+var app =new Vue({
     el: '#app',
     data: {
         //消費税率
@@ -31,7 +36,9 @@ var app =new VTTCue({
         opt3_price: 5000,   //料金(税抜)
         //オプション「写真スキャニング」
         opt4_num: 0,        //利用枚数
-        opt4_price: 500     //料金(税抜)
+        opt4_price: 500,     //料金(税抜)
+        //翌日の日付
+        tommorow: null
     },
     methods: {
         //税抜き金額を税込み金額に変換するメソッド
@@ -44,10 +51,17 @@ var app =new VTTCue({
             var date1 = new Date(dateString1);
             var date2 = new Date(dateString2);
             //２つの日付の差分(ミリ秒)を計算
-            var msDiff = date1.getTime() -date2.getTime();
+            var msDiff = date1.getTime() - date2.getTime();
             //求めた差分(ミリ秒)を日付に変換
             //差分÷(1000ミリ秒×60秒×60分×24時間)
             return Math.ceil(msDiff/(1000 * 60 * 24));
+        },  
+        //日付をYYYY-MM-DDの書式を返すメソッド
+        formatDate: function(dt) {
+            var y = dt.getFullYear();
+            var m = ('00' + (dt.getMonth()+1)).slice(-2);
+            var d = ('00' + dt.getDate()).slice(-2);
+            return (y + '-' + m + '-' + d);
         }
     },
     computed: {
@@ -106,6 +120,8 @@ var app =new VTTCue({
             //基本料金(税込み)を返す
             return this.incTax(this.basePrice + addPrice);
         },
+        //日付をYYYY-MM-DDの書式で返すメソッド
+
         //オプション料金(税込み)を返す算出プロパティ
         taxedOptPrice: function(){
             //オプション料金
@@ -133,8 +149,26 @@ var app =new VTTCue({
         taxedTotalPrice: function() {
             //基本料金(税込み)とオプション料金(税込み)の合計を返す
             return (this.taxedBasePrice +this.taxedOptPrice);
+        },
+        //明日の日付をYYYY-MM-DDの書式で返す算出プロパティ
+        tommorow: function() {
+            var dt = new Date();
+            dt.setDate(dt.getDate() + 1);
+            return this.formatDate(dt);
         }
-        //本「プロパティの初期値を設定する」から
-        //恐らくjavascriptで書いた場合とvue.jsで書いた場合も見比べる必要あり
+    },
+    created: function() {
+        //今日の日付を取得
+        var dt = new Date();
+        //挙式日に2ヶ月後の日付を設定
+        dt.setMonth(dt.getMonth() + 2);
+        this.wedding_date = this.formatDate(dt);
+        //DVD仕上がり予定日に、挙式日の1週間前の日付を設定
+        dt.setDate(dt.getDate() - 7);
+        this.delivery_date = this.formatDate(dt);
+        //DVD仕上がり仕上がり予定日に翌日以降しか入力できないようにする
+        dt = new Date();
+        dt.setDate(dt.getDate() + 1);
+        this.tommorow = this.formatDate(dt);
     }
-})
+});
